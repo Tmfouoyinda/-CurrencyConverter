@@ -1,24 +1,28 @@
 import requests
 
-class  CurrencyConverter():
+class CurrencyConverter:
+    def __init__(self):
+        self.result = None
+        self.data = None
+
     def api(self):
         try:
-            reponse = requests.get('......')
-            reponse.raise_for_status()
-            self.data = reponse.json()
+            response = requests.get('.....')
+            response.raise_for_status()
+            self.data = response.json()
         except requests.exceptions.HTTPError:
             print("Pas de connexion internet")
         except requests.exceptions.ConnectionError:
             print("Connection error")
 
-
-    def converter(self, montant, taux_source, taux_target):
+    def convert(self, amount, rate_origin, rate_target):
         rates = self.data["conversion_rates"]
-        taux_target = rates[taux_target]
-        taux_source = rates[taux_source]
+        rate_target = rates[rate_target]
+        rate_origin = rates[rate_origin]
 
-        self.result = (montant / taux_source) * taux_target
+        self.result = (amount / rate_origin) * rate_target
         return self.result
+
 if __name__ == "__main__":
 
     converter = CurrencyConverter()
@@ -27,5 +31,5 @@ if __name__ == "__main__":
     source = input("Devise source (ex: EUR) : ").upper()
     target = input("Devise cible  (ex: XOF) : ").upper()
 
-    result = converter.converter(montant, source, target)
+    result = converter.convert(montant, source, target)
     print(f"{montant} {source} = {result:.2f} {target}")
