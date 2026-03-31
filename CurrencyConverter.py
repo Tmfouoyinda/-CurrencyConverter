@@ -1,11 +1,9 @@
 import requests
 
-
-
 class  CurrencyConverter():
     def api(self):
         try:
-            reponse = requests.get('https://v6.exchangerate-api.com/v6/75fd07dbe1f5c791cd5414a1/latest/USD')
+            reponse = requests.get('......')
             reponse.raise_for_status()
             self.data = reponse.json()
         except requests.exceptions.HTTPError:
